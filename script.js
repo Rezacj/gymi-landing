@@ -228,33 +228,66 @@
 
     /* ===== Showcase Tabs ===== */
     const tabs = document.querySelectorAll('.tab');
-    const stagePhone = document.getElementById('stagePhone');
-    const stageTitle = document.getElementById('stageTitle');
-    const stageSub = document.getElementById('stageSub');
+    const stageImage = document.getElementById('stageImage');
 
-    const tabContent = [
-        { title: 'داشبورد', sub: 'نمای کلی باشگاه' },
-        { title: 'مدیریت اعضا', sub: 'لیست کامل اعضا' },
-        { title: 'کیف پول و پرداخت', sub: 'تراکنش‌های مالی' },
-        { title: 'کلاس‌ها', sub: 'زمان‌بندی هفتگی' }
+    const tabImages = [
+        {
+            src: 'images/app/dashboard.webp',
+            alt: 'صفحه داشبورد اپلیکیشن جیمی — نمای کلی باشگاه'
+        },
+        {
+            src: 'images/app/reports.webp',
+            alt: 'صفحه گزارش مالی اپلیکیشن جیمی — درآمد و تراکنش‌ها'
+        },
+        {
+            src: 'images/app/members.webp',
+            alt: 'صفحه مدیریت اعضا اپلیکیشن جیمی — لیست اعضای باشگاه'
+        },
+        {
+            src: 'images/app/notifications.webp',
+            alt: 'صفحه اعلان‌های اپلیکیشن جیمی — اطلاع‌رسانی‌ها'
+        }
     ];
+
+    // Preload بقیه عکس‌ها بعد از لود کامل صفحه (برای تغییر سریع تب‌ها)
+    function preloadShowcaseImages() {
+        tabImages.slice(1).forEach(function (img) {
+            const preloadImg = new Image();
+            preloadImg.src = img.src;
+        });
+    }
+
+    if (window.requestIdleCallback) {
+        window.requestIdleCallback(preloadShowcaseImages);
+    } else {
+        window.addEventListener('load', preloadShowcaseImages);
+    }
 
     tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
             const index = parseInt(tab.dataset.tab, 10);
+            if (!tabImages[index] || !stageImage) return;
 
             tabs.forEach(function (t) { t.classList.remove('active'); });
             tab.classList.add('active');
 
             // Animate phone switch
-            if (stagePhone) {
-                stagePhone.classList.add('switching');
-                setTimeout(function () {
-                    stageTitle.textContent = tabContent[index].title;
-                    stageSub.textContent = tabContent[index].sub;
-                    stagePhone.classList.remove('switching');
-                }, 250);
-            }
+            stageImage.classList.add('switching');
+
+            setTimeout(function () {
+                stageImage.src = tabImages[index].src;
+                stageImage.alt = tabImages[index].alt;
+
+                // بعد از لود عکس جدید، کلاس switching رو بردار
+                if (stageImage.complete) {
+                    stageImage.classList.remove('switching');
+                } else {
+                    stageImage.addEventListener('load', function onLoad() {
+                        stageImage.classList.remove('switching');
+                        stageImage.removeEventListener('load', onLoad);
+                    });
+                }
+            }, 250);
         });
     });
 
