@@ -5,23 +5,7 @@
 (function () {
     'use strict';
 
-    /* ===== Preloader ===== */
-    const preloader = document.getElementById('preloader');
-
-    window.addEventListener('load', function () {
-        setTimeout(function () {
-            if (preloader) {
-                preloader.classList.add('hidden');
-            }
-        }, 600);
-    });
-
-    // Fallback: hide preloader after 3s even if load doesn't fire
-    setTimeout(function () {
-        if (preloader && !preloader.classList.contains('hidden')) {
-            preloader.classList.add('hidden');
-        }
-    }, 3000);
+    
 
     /* ===== Scroll Progress Bar ===== */
     const scrollProgress = document.getElementById('scrollProgress');
@@ -196,11 +180,7 @@
         });
     }
 
-    /* ===== Brands Marquee (duplicate for seamless loop) ===== */
-    const marqueeTrack = document.getElementById('marqueeTrack');
-    if (marqueeTrack) {
-        marqueeTrack.innerHTML += marqueeTrack.innerHTML;
-    }
+   
 
     /* ===== Active Nav Link on Scroll ===== */
     const sections = document.querySelectorAll('section[id]');
@@ -226,28 +206,149 @@
     }
 
 
-    /* ===== Showcase Tabs ===== */
-    const tabs = document.querySelectorAll('.tab');
+        /* ===== Showcase Tabs ===== */
+    const roleButtons = document.querySelectorAll('.role-btn');
+    const tabsContainers = document.querySelectorAll('[data-role-tabs]');
     const stageImage = document.getElementById('stageImage');
 
-    const tabImages = [
-        {
-            src: 'images/app/dashboard.webp',
-            alt: 'صفحه داشبورد اپلیکیشن جیمی — نمای کلی باشگاه'
+    // داده‌های هر نقش
+    const showcaseData = {
+        coach: {
+            tabs: [
+                {
+                    src: 'images/app/coach/dashboard.webp',
+                    alt: 'صفحه داشبورد مربی در اپلیکیشن جیمی — نمای کلی باشگاه'
+                },
+                {
+                    src: 'images/app/coach/reports.webp',
+                    alt: 'صفحه گزارش مالی در اپلیکیشن جیمی — درآمد و تراکنش‌ها'
+                },
+                {
+                    src: 'images/app/coach/members.webp',
+                    alt: 'صفحه مدیریت اعضا در اپلیکیشن جیمی — لیست اعضای باشگاه'
+                },
+                {
+                    src: 'images/app/coach/notifications.webp',
+                    alt: 'صفحه اعلان‌های مربی در اپلیکیشن جیمی'
+                },
+                {
+                    src: 'images/app/coach/payments.webp',
+                    alt: 'صفحه مدیریت پرداخت‌ها در اپلیکیشن جیمی'
+                }
+            ]
         },
-        {
-            src: 'images/app/reports.webp',
-            alt: 'صفحه گزارش مالی اپلیکیشن جیمی — درآمد و تراکنش‌ها'
-        },
-        {
-            src: 'images/app/members.webp',
-            alt: 'صفحه مدیریت اعضا اپلیکیشن جیمی — لیست اعضای باشگاه'
-        },
-        {
-            src: 'images/app/notifications.webp',
-            alt: 'صفحه اعلان‌های اپلیکیشن جیمی — اطلاع‌رسانی‌ها'
+        member: {
+            tabs: [
+                {
+                    src: 'images/app/member/dashboard.webp',
+                    alt: 'صفحه داشبورد عضو باشگاه در اپلیکیشن جیمی'
+                },
+                {
+                    src: 'images/app/member/payments.webp',
+                    alt: 'صفحه پرداخت شهریه در اپلیکیشن جیمی'
+                },
+                {
+                    src: 'images/app/member/notifications.webp',
+                    alt: 'صفحه اعلان‌های عضو باشگاه در اپلیکیشن جیمی'
+                }
+            ]
         }
-    ];
+    };
+
+    let currentRole = 'coach';
+
+    // Preload عکس‌های نقش غیرفعال بعد از لود کامل صفحه
+    function preloadShowcaseImages() {
+        const otherRole = currentRole === 'coach' ? 'member' : 'coach';
+        showcaseData[otherRole].tabs.forEach(function (img) {
+            const preloadImg = new Image();
+            preloadImg.src = img.src;
+        });
+    }
+
+    if (window.requestIdleCallback) {
+        window.requestIdleCallback(preloadShowcaseImages);
+    } else {
+        window.addEventListener('load', preloadShowcaseImages);
+    }
+
+    // تغییر عکس با انیمیشن
+    function switchStageImage(src, alt) {
+        if (!stageImage) return;
+
+        stageImage.classList.add('switching');
+
+        setTimeout(function () {
+            stageImage.src = src;
+            stageImage.alt = alt;
+
+            if (stageImage.complete) {
+                stageImage.classList.remove('switching');
+            } else {
+                stageImage.addEventListener('load', function onLoad() {
+                    stageImage.classList.remove('switching');
+                    stageImage.removeEventListener('load', onLoad);
+                });
+            }
+        }, 250);
+    }
+
+    // مدیریت کلیک روی تب‌های هر نقش
+    tabsContainers.forEach(function (container) {
+        const tabs = container.querySelectorAll('.tab');
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                const index = parseInt(tab.dataset.tab, 10);
+                const roleTabs = showcaseData[currentRole].tabs;
+                if (!roleTabs[index]) return;
+
+                // حذف active از همه‌ی تب‌های این کانتینر
+                tabs.forEach(function (t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+
+                switchStageImage(roleTabs[index].src, roleTabs[index].alt);
+            });
+        });
+    });
+
+    // مدیریت کلیک روی دکمه‌های نقش
+    roleButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const newRole = btn.dataset.role;
+            if (newRole === currentRole) return;
+
+            // آپدیت وضعیت دکمه‌های نقش
+            roleButtons.forEach(function (b) {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+
+            // نمایش کانتینر تب‌های مربوطه، مخفی کردن بقیه
+            tabsContainers.forEach(function (container) {
+                if (container.dataset.roleTabs === newRole) {
+                    container.hidden = false;
+                } else {
+                    container.hidden = true;
+                }
+            });
+
+            currentRole = newRole;
+
+            // ریست تب فعال به اولی
+            const activeContainer = document.querySelector('[data-role-tabs="' + newRole + '"]');
+            const tabs = activeContainer.querySelectorAll('.tab');
+            tabs.forEach(function (t, i) {
+                t.classList.toggle('active', i === 0);
+            });
+
+            // عوض کردن عکس به اولین عکس نقش جدید
+            const firstTab = showcaseData[newRole].tabs[0];
+            switchStageImage(firstTab.src, firstTab.alt);
+        });
+    });
 
     // Preload بقیه عکس‌ها بعد از لود کامل صفحه (برای تغییر سریع تب‌ها)
     function preloadShowcaseImages() {

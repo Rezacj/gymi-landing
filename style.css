@@ -137,65 +137,6 @@ button {
     border: 2px solid var(--bg-2);
 }
 
-/* ===== Preloader ===== */
-.preloader {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.preloader.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.preloader-content {
-    text-align: center;
-}
-
-.preloader-logo {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    background: var(--grad-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-.preloader-bar {
-    width: 200px;
-    height: 4px;
-    background: var(--surface-2);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.preloader-bar span {
-    display: block;
-    height: 100%;
-    width: 40%;
-    background: var(--grad-primary);
-    border-radius: 10px;
-    animation: loading 1.2s ease-in-out infinite;
-}
-
-@keyframes loading {
-    0% {
-        transform: translateX(100%);
-    }
-
-    100% {
-        transform: translateX(-250%);
-    }
-}
 
 @keyframes pulse {
 
@@ -327,23 +268,22 @@ button {
 .logo:hover {
     transform: scale(1.05);
 }
-
-.logo-icon {
+.logo-img {
+    display: block;
     width: 38px;
     height: 38px;
-    display: grid;
-    place-items: center;
-    background: var(--grad-primary);
-    border-radius: 11px;
-    padding: 8px;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 12px;    /* ← این رو بیشتر کن */
+    transition: transform var(--t-fast);
+}
+
+.logo:hover .logo-img {
+    transform: scale(1.05);
 }
 
 .logo-accent {
-    background: var(--grad-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffff;
 }
 
 .nav-menu {
@@ -977,10 +917,9 @@ button {
     font-size: 1.1rem;
     color: var(--text-2);
 }
-
-/* ===== Brands Marquee ===== */
+/* ===== Brands ===== */
 .brands {
-    padding: 40px 0 20px;
+    padding: 50px 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     background: rgba(255, 255, 255, 0.015);
@@ -990,46 +929,36 @@ button {
     text-align: center;
     font-size: 0.85rem;
     color: var(--text-3);
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     letter-spacing: 1px;
 }
 
-.marquee {
-    overflow: hidden;
-    position: relative;
-    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-}
-
-.marquee-track {
+.brands-static {
     display: flex;
-    gap: 60px;
-    width: max-content;
-    animation: marquee 25s linear infinite;
-}
-
-@keyframes marquee {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
 .brand-item {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-2);
     white-space: nowrap;
-    transition: color var(--t-fast);
+    padding: 10px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all var(--t-base);
 }
 
 .brand-item:hover {
     color: var(--text);
+    border-color: var(--border-2);
+    background: var(--surface-2);
+    transform: translateY(-3px);
 }
-
 /* ===== Features ===== */
 .features-grid {
     display: grid;
@@ -2381,4 +2310,205 @@ button {
 .stage-image.switching {
     opacity: 0.3;
     transform: scale(0.97);
+}
+/* =================================
+   Showcase Sidebar & Role Switcher
+   ================================= */
+.showcase-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* دکمه‌های انتخاب نقش */
+.role-switcher {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.role-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-2);
+    transition: all var(--t-base);
+    white-space: nowrap;
+}
+
+.role-btn svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity var(--t-fast);
+}
+
+.role-btn:hover {
+    color: var(--text);
+    background: var(--surface-2);
+}
+
+.role-btn.active {
+    color: #fff;
+    background: var(--grad-primary);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+.role-btn.active svg {
+    opacity: 1;
+}
+
+/* کانتینر تب‌ها */
+.showcase-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.showcase-tabs[hidden] {
+    display: none;
+}
+/* =================================
+   Download Platforms
+   ================================= */
+.download-platforms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 720px;
+    margin: 40px auto 0;
+}
+
+.platform-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: 28px 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-lg);
+    transition: all var(--t-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.platform-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--grad-card);
+    opacity: 0;
+    transition: opacity var(--t-base);
+    pointer-events: none;
+}
+
+.platform-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: var(--shadow-md);
+}
+
+.platform-card:hover::before {
+    opacity: 1;
+}
+
+.platform-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.platform-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 0.5px;
+}
+
+.platform-label svg {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.platform-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.platform-card .store-btn {
+    flex: 1;
+    min-width: 130px;
+    justify-content: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-2);
+    border-radius: 12px;
+    gap: 8px;
+}
+
+.platform-card .store-btn strong {
+    font-size: 0.95rem;
+}
+
+.platform-card .store-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 640px) {
+    .download-platforms {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .platform-card {
+        padding: 24px 20px;
+    }
+
+    .platform-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .platform-card .store-btn {
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+/* =================================
+   Store Icons (Images)
+   ================================= */
+.store-icon {
+    display: block;
+    object-fit: contain;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    transition: transform var(--t-fast);
+}
+
+.store-btn:hover .store-icon {
+    transform: scale(1.08);
+}
+
+/* SVG icon داخل store-btn هم هم‌اندازه بشه */
+.platform-card .store-btn svg.store-icon {
+    color: var(--primary);
 }
