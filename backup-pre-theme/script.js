@@ -5,43 +5,7 @@
 (function () {
     'use strict';
 
-    /* ===== Theme Switcher ===== */
-    var THEME_KEY = 'gymi-theme';
-
-    function setTheme(theme) {
-        if (theme !== 'light' && theme !== 'dark') {
-            theme = 'light';
-        }
-        document.documentElement.setAttribute('data-theme', theme);
-        try {
-            localStorage.setItem(THEME_KEY, theme);
-        } catch (e) {
-            /* storage may be blocked (private mode, file://) — keep it in-memory only */
-        }
-        syncThemeToggles(theme);
-    }
-
-    function syncThemeToggles(theme) {
-        document.querySelectorAll('.theme-toggle').forEach(function (btn) {
-            btn.setAttribute('aria-label', theme === 'dark' ? 'فعال‌سازی تم روشن' : 'فعال‌سازی تم تیره');
-            btn.setAttribute('title', theme === 'dark' ? 'فعال‌سازی تم روشن' : 'فعال‌سازی تم تیره');
-        });
-    }
-
-    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var current = document.documentElement.getAttribute('data-theme') || 'light';
-            setTheme(current === 'dark' ? 'light' : 'dark');
-        });
-    });
-
-    /* The inline <head> script already applied the stored theme before render
-       (no FOUC). Here we only sync the toggle button states on load. */
-    var initialTheme = 'light';
-    try {
-        initialTheme = localStorage.getItem(THEME_KEY) || 'light';
-    } catch (e) {}
-    syncThemeToggles(initialTheme);
+    
 
     /* ===== Scroll Progress Bar ===== */
     const scrollProgress = document.getElementById('scrollProgress');
