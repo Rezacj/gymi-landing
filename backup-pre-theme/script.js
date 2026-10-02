@@ -350,48 +350,7 @@
         });
     });
 
-    // Preload بقیه عکس‌ها بعد از لود کامل صفحه (برای تغییر سریع تب‌ها)
-    function preloadShowcaseImages() {
-        tabImages.slice(1).forEach(function (img) {
-            const preloadImg = new Image();
-            preloadImg.src = img.src;
-        });
-    }
-
-    if (window.requestIdleCallback) {
-        window.requestIdleCallback(preloadShowcaseImages);
-    } else {
-        window.addEventListener('load', preloadShowcaseImages);
-    }
-
-    tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () {
-            const index = parseInt(tab.dataset.tab, 10);
-            if (!tabImages[index] || !stageImage) return;
-
-            tabs.forEach(function (t) { t.classList.remove('active'); });
-            tab.classList.add('active');
-
-            // Animate phone switch
-            stageImage.classList.add('switching');
-
-            setTimeout(function () {
-                stageImage.src = tabImages[index].src;
-                stageImage.alt = tabImages[index].alt;
-
-                // بعد از لود عکس جدید، کلاس switching رو بردار
-                if (stageImage.complete) {
-                    stageImage.classList.remove('switching');
-                } else {
-                    stageImage.addEventListener('load', function onLoad() {
-                        stageImage.classList.remove('switching');
-                        stageImage.removeEventListener('load', onLoad);
-                    });
-                }
-            }, 250);
-        });
-    });
-
+    
     /* ===== Parallax on Hero Phone (subtle) ===== */
     const heroVisual = document.querySelector('.hero-visual');
 

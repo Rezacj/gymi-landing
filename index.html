@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="جیمی (Gymi) | اپلیکیشن حرفه‌ای مدیریت باشگاه‌های ورزشی - ثبت‌نام اعضا، پرداخت، کلاس‌ها و گزارش‌گیری هوشمند">
+        content="جیمی (Gymi) | اپلیکیشن حرفه‌ای مدیریت باشگاه‌های ورزشی - ثبت‌نام اعضا، پرداخت آنلاین شهریه و گزارش‌گیری هوشمند">
     <title>جیمی Gymi | مدیریت هوشمند باشگاه ورزشی</title>
 
     <!-- Apply saved theme before render to prevent flash (FOUC) -->
@@ -24,9 +24,7 @@
 </head>
 
 <body>
-
-    
-
+    <div class="bg-glows" aria-hidden="true"></div>
     <div class="scroll-progress" id="scrollProgress"></div>
 
     <header class="navbar" id="navbar">
@@ -104,19 +102,18 @@
                 </h1>
 
                 <p class="hero-subtitle reveal" data-delay="200">
-                    جیمی، کامل‌ترین اپلیکیشن مدیریت باشگاه‌های ورزشیه. از ثبت‌نام اعضا و پرداخت تا کلاس‌ها، مربیان و
-                    گزارش‌های مالی — همه‌چیز توی یک اپ ساده و سریع.
+                    جیمی، اپلیکیشن مدیریت باشگاه‌های ورزشی. از ثبت‌نام اعضا و پرداخت شهریه آنلاین و گزارش‌های مالی —
+                    همه‌چیز توی یک اپ موبایل ساده و سریع.
                 </p>
 
                 <div class="hero-buttons reveal" data-delay="300">
-                    <a href="#download" class="btn btn-primary">
+                    <a href="#pricing" class="btn btn-primary">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"
                             height="20">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                            <line x1="7" y1="7" x2="7.01" y2="7" />
                         </svg>
-                        دانلود رایگان
+                        پلن‌ها
                     </a>
                     <a href="#showcase" class="btn btn-ghost">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"
@@ -175,7 +172,7 @@
                         <div class="phone-screen">
                             <div class="app-header">
                                 <div class="app-greeting">سلام، رضا 👋</div>
-                                <div class="app-sub">باشگاه قدر اسپرت</div>
+                                <div class="app-sub">باشگاه بدنسازی آذربایجان</div>
                             </div>
                             <div class="app-stats">
                                 <div class="app-stat">
@@ -302,29 +299,37 @@
         <div class="container">
             <div class="section-head">
                 <div class="section-tag reveal">روش کار</div>
-                <h2 class="section-title reveal" data-delay="100">فقط در <span class="gradient-text">۳ قدم</span> شروع
+                <h2 class="section-title reveal" data-delay="100">فقط در <span class="gradient-text">۴ قدم</span> شروع
                     کن</h2>
-                <p class="section-desc reveal" data-delay="200">از نصب تا اولین ثبت‌نام، کمتر از ۱۰ دقیقه طول می‌کشه.
+                <p class="section-desc reveal" data-delay="200">از ثبت پلن تا وارد کردن اعضا، کمتر از ۱۰ دقیقه طول
+                    می‌کشه.
                 </p>
             </div>
 
             <div class="steps">
                 <div class="step reveal" data-delay="0">
                     <div class="step-number">۱</div>
-                    <h3>اپ رو نصب کن</h3>
-                    <p>جیمی رو از بازار یا مایکت دانلود کن و حساب کاربری بساز.</p>
+                    <h3>پلن متناسب با باشگاهت رو ثبت کن</h3>
+                    <p>بر اساس نیازت یکی از پلن‌ها رو ثبت کن و نام کاربری و رمز عبور خودت رو دریافت کن.</p>
                 </div>
-                <div class="step-line reveal" data-delay="150"></div>
-                <div class="step reveal" data-delay="200">
+                <div class="step-line reveal" data-delay="100"></div>
+                <div class="step reveal" data-delay="150">
                     <div class="step-number">۲</div>
-                    <h3>باشگاهت رو ثبت کن</h3>
-                    <p>اطلاعات باشگاه، مربیان و کلاس‌ها رو وارد کن. پنل مدیریت در اختیارته.</p>
+                    <h3>اپ رو نصب کن</h3>
+                    <p>جیمی رو از بازار یا مایکت دانلود کن و وارد حسابت شو.</p>
                 </div>
-                <div class="step-line reveal" data-delay="250"></div>
-                <div class="step reveal" data-delay="300">
+                <div class="step-line reveal" data-delay="200"></div>
+                <div class="step reveal" data-delay="250">
                     <div class="step-number">۳</div>
-                    <h3>عضو بگیر و رشد کن</h3>
-                    <p>ثبت‌نام اعضا رو شروع کن و با گزارش‌های هوشمند، درآمدت رو چند برابر کن.</p>
+                    <h3>باشگاهت رو ثبت کن</h3>
+                    <p>اطلاعات باشگاه رو وارد کن. پنل مدیریت در اختیارته.</p>
+                </div>
+                <div class="step-line reveal" data-delay="300"></div>
+                <div class="step reveal" data-delay="350">
+                    <div class="step-number">۴</div>
+                    <h3>اعضای باشگاه رو وارد کن</h3>
+                    <p>اعضای باشگاه اپلیکیشن رو نصب می‌کنن و با QR کدی که در اختیارته وارد باشگاهت می‌شن در جیمی و
+                        می‌تونن شهریه رو اونجا پرداخت کنن.</p>
                 </div>
             </div>
         </div>
@@ -357,8 +362,9 @@
                         <button class="role-btn" data-role="member" role="tab" aria-selected="false">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"
                                 height="18">
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M12 6v6l4 2" />
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                                <path d="M8 7l2 2 4-4" />
                             </svg>
                             اعضای باشگاه
                         </button>
@@ -402,7 +408,7 @@
                 <div class="section-tag reveal">نظرات</div>
                 <h2 class="section-title reveal" data-delay="100">کاربرا <span class="gradient-text">چه میگن</span>؟
                 </h2>
-                <p class="section-desc reveal" data-delay="200">بیش از ۲٬۵۰۰ مدیر باشگاه، جیمی رو انتخاب کردن.</p>
+                <p class="section-desc reveal" data-delay="200">بیش از ۳ مدیر باشگاه، جیمی رو انتخاب کردن.</p>
             </div>
 
             <div class="testimonials-grid">
@@ -414,7 +420,7 @@
                         <span class="avatar">م</span>
                         <div>
                             <div class="ta-name">محمد رضایی</div>
-                            <div class="ta-role">مدیر باشگاه قدر اسپرت</div>
+                            <div class="ta-role">مدیر باشگاه کاراته کارن</div>
                         </div>
                     </div>
                 </div>
@@ -424,22 +430,23 @@
                     <p>«گزارش‌های مالی بهم کمک کرد که هزینه‌های اضافه رو پیدا کنم. درآمد باشگاهم توی ۳ ماه ۳۰٪ بیشتر
                         شد.»</p>
                     <div class="testimonial-author">
-                        <span class="avatar">س</span>
+                        <span class="avatar">د</span>
                         <div>
-                            <div class="ta-name">سارا احمدی</div>
-                            <div class="ta-role">مدیر فیت‌کلاب</div>
+                            <div class="ta-name">داوود ایمانی</div>
+                            <div class="ta-role">مدیر باشگاه بدنسازی آذربایجان</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="testimonial-card reveal" data-delay="300">
                     <div class="stars">★★★★★</div>
-                    <p>«اپ خیلی روان و سریعه. اعضام خودشون آنلاین کلاس رزرو میکنن و دیگه نیازی به تماس با من نیست.»</p>
+                    <p>«اپ خیلی روان و سریعه. اعضای باشگاهم خودشون آنلاین شهریه رو پرداخت می‌کنن و مثل دستگاه پوز مستقیم
+                        به حساب من واریز میشه.»</p>
                     <div class="testimonial-author">
                         <span class="avatar">ع</span>
                         <div>
                             <div class="ta-name">علی کریمی</div>
-                            <div class="ta-role">مدیر کراس‌فیت تهران</div>
+                            <div class="ta-role">مدیر باشگاه بوکس سانی</div>
                         </div>
                     </div>
                 </div>
@@ -462,12 +469,14 @@
                     <div class="pricing-name">پایه</div>
                     <div class="pricing-price">۵ <span class="pricing-unit">میلیون ت / سال</span></div>
                     <ul class="pricing-features">
-                        <li>تا ۲۰۰ عضو</li>
-                        <li>مدیریت کلاس‌ها</li>
-                        <li>پشتیبانی پیامکی</li>
+                        <li>تا ۱۰۰ عضو</li>
+                        <li>پرداخت آنلاین داخلی</li>
+                        <li>مدیریت اعضا</li>
+                        <li>پشتیبانی از اعلان</li>
                         <li>گزارش ماهانه</li>
+                        <li>پشتیبانی ۲۴ ساعته</li>
                     </ul>
-                    <a href="#download" class="btn btn-ghost btn-block">شروع کن</a>
+                    <a href="contact.html" class="btn btn-ghost btn-block">شروع کن</a>
                 </div>
 
                 <div class="pricing-card popular reveal" data-delay="100">
@@ -475,14 +484,12 @@
                     <div class="pricing-name">حرفه‌ای</div>
                     <div class="pricing-price">۱۰ <span class="pricing-unit">میلیون ت / سال</span></div>
                     <ul class="pricing-features">
-                        <li>باشگاه‌های +۲۰۰ عضو</li>
-                        <li>اعضای نامحدود</li>
+                        <li>تا ۵۰۰ عضو</li>
                         <li>پرداخت آنلاین داخلی</li>
-                        <li>گزارش لحظه‌ای + اکسل</li>
-                        <li>اپ اختصاصی با لوگوی شما</li>
+                        <li>گزارش لحظه‌ای + خروجی PDF</li>
                         <li>پشتیبانی ۲۴ ساعته</li>
                     </ul>
-                    <a href="#download" class="btn btn-primary btn-block">شروع کن</a>
+                    <a href="contact.html" class="btn btn-primary btn-block">شروع کن</a>
                 </div>
 
                 <div class="pricing-card reveal" data-delay="200">
@@ -491,10 +498,9 @@
                     <ul class="pricing-features">
                         <li>چند شعبه</li>
                         <li>دسترسی نقش‌محور</li>
-                        <li>اتصال به نرم‌افزارهای مالی</li>
                         <li>مدیر اختصاصی پشتیبانی</li>
                     </ul>
-                    <a href="#download" class="btn btn-ghost btn-block">تماس با ما</a>
+                    <a href="contact.html" class="btn btn-ghost btn-block">شروع کن</a>
                 </div>
             </div>
         </div>

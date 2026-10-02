@@ -50,7 +50,7 @@
     --success: #16A085;
     --warning: #F59E0B;
     --error: #EF4444;
-
+    --phone-notch-bg: #1a1a1a;
     --grad-primary: linear-gradient(135deg, #16A085 0%, #087F68 100%);
     --grad-text: linear-gradient(90deg, #16A085, #087F68);
     --grad-card: linear-gradient(145deg, rgba(22, 160, 133, 0.08), rgba(22, 160, 133, 0.02));
@@ -97,7 +97,7 @@
     --surface-2: rgba(255, 255, 255, 0.08);
     --border: rgba(255, 255, 255, 0.1);
     --border-2: rgba(255, 255, 255, 0.18);
-
+    --phone-notch-bg: #000;
     --text: #f4f6ff;
     --text-2: #a8b0d4;
     --text-3: #6b74a0;
@@ -261,11 +261,7 @@ button {
     width: 100%;
 }
 
-.btn-primary {
-    background: var(--grad-primary);
-    color: #fff;
-    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.4);
-}
+
 
 .btn-primary::before {
     content: '';
@@ -274,6 +270,7 @@ button {
     background: var(--btn-hover-grad);
     opacity: 0;
     transition: opacity var(--t-base);
+    z-index: -1;    /* ← اضافه کن */
 }
 
 .btn-primary:hover {
@@ -285,9 +282,18 @@ button {
     opacity: 1;
 }
 
-.btn-primary>* {
+.btn-primary > * {
     position: relative;
     z-index: 1;
+}
+
+.btn-primary {
+    background: var(--grad-primary);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.4);
+    position: relative;
+    z-index: 1;     /* ← اضافه کن */
+    isolation: isolate;
 }
 
 .btn-ghost {
@@ -341,13 +347,15 @@ button {
 .logo:hover {
     transform: scale(1.05);
 }
+
 .logo-img {
     display: block;
     width: 38px;
     height: 38px;
     object-fit: contain;
     flex-shrink: 0;
-    border-radius: 12px;    /* ← این رو بیشتر کن */
+    border-radius: 12px;
+    /* ← این رو بیشتر کن */
     transition: transform var(--t-fast);
 }
 
@@ -414,7 +422,12 @@ button {
     background: var(--surface-2);
     border-color: var(--primary);
     color: var(--primary);
-    transform: rotate(-12deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .theme-toggle:hover {
+        transform: rotate(-12deg);
+    }
 }
 
 .theme-toggle svg {
@@ -743,7 +756,7 @@ button {
     transform: translateX(-50%);
     width: 110px;
     height: 26px;
-    background: #000;
+    background: var(--phone-notch-bg);
     border-radius: 0 0 18px 18px;
     z-index: 10;
 }
@@ -1035,6 +1048,7 @@ button {
     font-size: 1.1rem;
     color: var(--text-2);
 }
+
 /* ===== Brands ===== */
 .brands {
     padding: 50px 0;
@@ -1077,6 +1091,7 @@ button {
     background: var(--surface-2);
     transform: translateY(-3px);
 }
+
 /* ===== Features ===== */
 .features-grid {
     display: grid;
@@ -1232,10 +1247,10 @@ button {
 
 .step {
     flex: 1;
-    min-width: 260px;
-    max-width: 340px;
+    min-width: 200px;      /* ← از 260 به 200 */
+    max-width: 260px;      /* ← از 340 به 260 */
     text-align: center;
-    padding: 32px 24px;
+    padding: 28px 18px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -1274,7 +1289,7 @@ button {
 }
 
 .step-line {
-    width: 60px;
+    width: 30px;
     align-self: center;
     height: 2px;
     background: linear-gradient(90deg, var(--primary), transparent);
@@ -1872,13 +1887,19 @@ button {
     }
 
     .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
 
-    .hero-buttons .btn {
-        width: 100%;
-    }
+.hero-buttons .btn {
+    width: auto;
+    min-width: 140px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    flex: 0 1 auto;
+}
 
     .phone-wrapper {
         width: 280px;
@@ -1890,7 +1911,7 @@ button {
         border-radius: 40px;
     }
 
-    
+
 
     .floating-card {
         padding: 10px 14px;
@@ -2438,6 +2459,7 @@ button {
     opacity: 0.3;
     transform: scale(0.97);
 }
+
 /* =================================
    Showcase Sidebar & Role Switcher
    ================================= */
@@ -2503,6 +2525,7 @@ button {
 .showcase-tabs[hidden] {
     display: none;
 }
+
 /* =================================
    Download Platforms
    ================================= */
@@ -2549,7 +2572,7 @@ button {
     opacity: 1;
 }
 
-.platform-card > * {
+.platform-card>* {
     position: relative;
     z-index: 1;
 }
@@ -2638,4 +2661,150 @@ button {
 /* SVG icon داخل store-btn هم هم‌اندازه بشه */
 .platform-card .store-btn svg.store-icon {
     color: var(--primary);
+}
+
+/* =================================
+   Section Background Decorations
+   ================================= */
+
+/* --- 1. Dot Grid روی body (فقط دسکتاپ) --- */
+
+/* =================================
+   Background Glows (سراسری)
+   ================================= */
+.bg-glows {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+
+    /* Dot Grid */
+    background-image: radial-gradient(circle, var(--border-2) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.5;    /* ← کم‌رنگش کن که با glowها تداخل نکنه */
+}
+
+[data-theme="dark"] .bg-glows {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+@media (max-width: 1023px) {
+    .bg-glows {
+        display: block;    /* ← از display: none به block (اگه می‌خوای روی موبایل هم باشه) */
+    }
+}
+
+.bg-glows::before,
+.bg-glows::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+}
+
+/* glow سبز چپ-بالا */
+.bg-glows::before {
+    top: 10%;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--primary) 0%, transparent 65%);
+    opacity: 0.35;
+}
+
+/* glow آبی راست-وسط */
+.bg-glows::after {
+    top: 55%;
+    right: -250px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 65%);
+    opacity: 0.25;
+}
+
+[data-theme="light"] .bg-glows::before {
+    opacity: 0.25;
+}
+
+[data-theme="light"] .bg-glows::after {
+    opacity: 0.18;
+}
+
+/* =================================
+   Stats: Gradient ملایم
+   ================================= */
+.stats {
+    position: relative;
+    background:
+        radial-gradient(ellipse 60% 80% at 50% 50%,
+            rgba(var(--primary-rgb), 0.12) 0%,
+            transparent 70%);
+}
+
+[data-theme="light"] .stats {
+    background:
+        radial-gradient(ellipse 60% 80% at 50% 50%,
+            rgba(var(--primary-rgb), 0.1) 0%,
+            transparent 70%);
+}
+
+/* =================================
+   Testimonials: Dot Grid موضعی
+   ================================= */
+.testimonials {
+    position: relative;
+}
+
+.testimonials::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--border-2) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse at center, black 25%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 80%);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+}
+
+[data-theme="light"] .testimonials::before {
+    opacity: 0.75;
+}
+
+.testimonials .container {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =================================
+   محتوا روی glowها
+   ================================= */
+body > *:not(.bg-glows):not(.navbar) {
+    position: relative;
+    z-index: 1;
+}
+
+/* =================================
+   Reduced Motion
+   ================================= */
+@media (prefers-reduced-motion: reduce) {
+    .bg-glows::before,
+    .bg-glows::after {
+        animation: none;
+    }
+}
+/* =================================
+   Disable heavy animations on mobile
+   ================================= */
+@media (max-width: 900px) {
+    .phone,
+    .stage-phone,
+    .floating-card,
+    .orb {
+        animation: none;
+    }
 }
