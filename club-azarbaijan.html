@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="باشگاه بدنسازی آذربایجان — پل سرداران فاتح، کوی مهران، گلریزان غربی. سانس بانوان و آقایان. شهریه ماهانه ۷۰۰ هزار تومان.">
+    <title>باشگاه بدنسازی آذربایجان | جیمی</title>
+
+    <!-- ===== Favicon ===== -->
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+    <meta name="theme-color" content="#16A085">
+
+    <!-- Apply saved theme before render to prevent flash (FOUC) -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('gymi-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
+
+    <link rel="preload" href="fonts/Vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Vazirmatn-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Club landing-specific styles */
+        .club-hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #E8F6F3 0%, #F7F9F8 100%);
+            text-align: center;
+        }
+
+        .club-hero-logo {
+            width: 96px;
+            height: 96px;
+            border-radius: 24px;
+            background: #16A085;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 44px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(22, 160, 133, 0.25);
+        }
+
+        .club-hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #17201D;
+            margin-bottom: 12px;
+        }
+
+        .club-hero p {
+            font-size: 16px;
+            color: #66736F;
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .club-section {
+            padding: 60px 0;
+        }
+
+        .club-section-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #17201D;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .club-section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: #16A085;
+            border-radius: 4px;
+        }
+
+        .club-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .club-card {
+            background: #fff;
+            border: 1px solid #E4E9E7;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .club-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #E8F6F3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #16A085;
+            margin-bottom: 16px;
+        }
+
+        .club-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #17201D;
+            margin-bottom: 8px;
+        }
+
+        .club-card p {
+            font-size: 14px;
+            color: #66736F;
+            line-height: 1.7;
+        }
+
+        .shift-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: #F7F9F8;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .shift-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .shift-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #17201D;
+            font-size: 14px;
+        }
+
+        .shift-label.men {
+            color: #16A085;
+        }
+
+        .shift-label.women {
+            color: #EC4899;
+        }
+
+        .shift-time {
+            font-weight: 700;
+            color: #17201D;
+            font-size: 14px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .pricing-card {
+            background: #fff;
+            border: 2px solid #16A085;
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .pricing-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: #17201D;
+            margin-bottom: 8px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 900;
+            color: #16A085;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .pricing-unit {
+            font-size: 14px;
+            font-weight: 600;
+            color: #66736F;
+        }
+
+        .club-cta {
+            margin-top: 24px;
+            display: inline-block;
+            padding: 14px 32px;
+            background: #16A085;
+            color: #fff;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .club-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(22, 160, 133, 0.3);
+        }
+
+        .club-footer {
+            background: #17201D;
+            color: #fff;
+            padding: 40px 0 24px;
+            text-align: center;
+        }
+
+        .club-footer p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+        }
+
+        .club-footer a {
+            color: #82F7D8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .club-footer-brand {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 640px) {
+            .club-hero {
+                padding: 100px 0 40px;
+            }
+
+            .club-hero h1 {
+                font-size: 24px;
+            }
+
+            .club-section {
+                padding: 40px 0;
+            }
+
+            .pricing-price {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== Header ===== -->
+    <header class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo/logo-icon.webp" alt="لوگوی جیمی" class="logo-img" width="38" height="38">
+                <span class="logo-accent">جیمی</span>
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="#info" class="nav-link">مشخصات</a>
+                <a href="#shifts" class="nav-link">سانس‌ها</a>
+                <a href="#pricing" class="nav-link">شهریه</a>
+                <a href="#contact" class="nav-link">تماس</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="https://app.gymiapps.ir/" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+                    ورود / ثبت‌نام
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== Hero ===== -->
+    <section class="club-hero">
+        <div class="container">
+            <div class="club-hero-logo">آ</div>
+            <h1>باشگاه بدنسازی آذربایجان</h1>
+            <p>
+                مجموعه بدنسازی و آمادگی جسمانی با سانس‌های مجزا برای بانوان و آقایان.
+                مجهز به دستگاه‌های مدرن و مربیان حرفه‌ای.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== Info ===== -->
+    <section class="club-section" id="info">
+        <div class="container">
+            <h2 class="club-section-title">مشخصات باشگاه</h2>
+            <div class="club-grid">
+                <div class="club-card">
+                    <div class="club-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                    </div>
+                    <h3>آدرس</h3>
+                    <p>پل سرداران فاتح - کوی مهران - گلریزان غربی</p>
+                </div>
+
+                <div class="club-card">
+                    <div class="club-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                    <h3>شماره تماس</h3>
+                    <p dir="ltr" style="text-align: right;">۰۹۲۱۵۲۷۱۴۲۲</p>
+                </div>
+
+                <div class="club-card">
+                    <div class="club-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                            <path d="M6.5 6.5h11" />
+                            <path d="M21 21H3" />
+                            <path d="M3 21V9l9-6 9 6v12" />
+                            <path d="M9 21v-6h6v6" />
+                        </svg>
+                    </div>
+                    <h3>نوع فعالیت</h3>
+                    <p>بدنسازی و آمادگی جسمانی — سانس بانوان و آقایان</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Shifts ===== -->
+    <section class="club-section" id="shifts" style="background: #F7F9F8;">
+        <div class="container">
+            <h2 class="club-section-title">ساعات فعالیت</h2>
+            <div style="max-width: 560px;">
+                <div class="shift-row">
+                    <div class="shift-label women">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <circle cx="12" cy="8" r="5" />
+                            <path d="M12 13v8M9 18h6" />
+                        </svg>
+                        سانس بانوان
+                    </div>
+                    <div class="shift-time">۹:۰۰ تا ۱۵:۰۰</div>
+                </div>
+
+                <div class="shift-row">
+                    <div class="shift-label men">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <circle cx="10" cy="14" r="5" />
+                            <path d="M19 5l-5.4 5.4M19 5h-4M19 5v4" />
+                        </svg>
+                        سانس آقایان
+                    </div>
+                    <div class="shift-time">۱۸:۰۰ تا ۲۳:۰۰</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Pricing ===== -->
+    <section class="club-section" id="pricing">
+        <div class="container">
+            <h2 class="club-section-title">شهریه عضویت</h2>
+            <div style="max-width: 360px;">
+                <div class="pricing-card">
+                    <div class="pricing-name">شهریه ماهانه</div>
+                    <div class="pricing-price">۷۰۰,۰۰۰</div>
+                    <div class="pricing-unit">تومان / ماه</div>
+                    <a href="https://app.gymiapps.ir/" class="club-cta" target="_blank" rel="noopener">
+                        ثبت‌نام در باشگاه
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="club-footer" id="contact">
+        <div class="container">
+            <p><strong style="color: #fff;">باشگاه بدنسازی آذربایجان</strong></p>
+            <p>پل سرداران فاتح - کوی مهران - گلریزان غربی</p>
+            <p>تلفن: <span dir="ltr">۰۹۲۱۵۲۷۱۴۲۲</span></p>
+
+            <div class="club-footer-brand">
+                این صفحه توسط پلتفرم
+                <a href="https://gymiapps.ir/" target="_blank" rel="noopener">جیمی (Gymi)</a>
+                مدیریت می‌شود
+                &nbsp;•&nbsp;
+                <a href="https://gymiapps.ir/terms.html" target="_blank" rel="noopener">قوانین</a>
+                &nbsp;•&nbsp;
+                <a href="https://gymiapps.ir/privacy.html" target="_blank" rel="noopener">حریم خصوصی</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
